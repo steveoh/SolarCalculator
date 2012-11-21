@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace SolarCalculator
+namespace SolarCalculator.Endpoints
 {
     /// <summary>
     /// Displays the information about the soe. 
