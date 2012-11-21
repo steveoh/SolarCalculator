@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarCalculator", "SolarCalculator.csproj", "{D2B1FB4E-D100-43DA-917D-A912FF9DFFFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E16FE295-B2B6-4A68-B0D5-412317DEEE64}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarCalculator.Tests", "..\SolarCalculator.Tests\SolarCalculator.Tests.csproj", "{CAA9EE8F-1C75-43DD-9A21-61ED32EC41C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2B1FB4E-D100-43DA-917D-A912FF9DFFFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2B1FB4E-D100-43DA-917D-A912FF9DFFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2B1FB4E-D100-43DA-917D-A912FF9DFFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2B1FB4E-D100-43DA-917D-A912FF9DFFFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAA9EE8F-1C75-43DD-9A21-61ED32EC41C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAA9EE8F-1C75-43DD-9A21-61ED32EC41C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAA9EE8F-1C75-43DD-9A21-61ED32EC41C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAA9EE8F-1C75-43DD-9A21-61ED32EC41C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
