@@ -66,7 +66,7 @@ namespace SolarCalculator.Endpoints
             double? durationThreshold;
             found = operationInput.TryGetAsDouble("durationThreshold", out durationThreshold);
             if (!found || !durationThreshold.HasValue)
-                errors.Message += "Value cannot be null: {0} ".With("durationThreshhold");
+                durationThreshold = 0;
 
             if (errors.HasErrors)
                 return Json(new ErrorContainer(errors));
