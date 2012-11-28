@@ -1,5 +1,3 @@
-using System.Collections.ObjectModel;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace SolarCalculator.Models.Date
@@ -9,117 +7,31 @@ namespace SolarCalculator.Models.Date
     /// </summary>
     public class AnnualSolarPotential
     {
-        /// <summary>
-        ///   Initializes a new instance of the <see cref="AnnualSolarPotential" /> class.
-        /// </summary>
-        public AnnualSolarPotential()
-        {
-            January = new Collection<int>();
-            February = new Collection<int>();
-            March = new Collection<int>();
-            April = new Collection<int>();
-            May = new Collection<int>();
-            June = new Collection<int>();
-            July = new Collection<int>();
-            August = new Collection<int>();
-            September = new Collection<int>();
-            October = new Collection<int>();
-            November = new Collection<int>();
-            December = new Collection<int>();
-        }
-
-        /// <summary>
-        ///   Gets or sets the january.
-        /// </summary>
-        /// <value> The january values. </value>
         [JsonIgnore]
-        public Collection<int> January { get; set; }
+        public int Points { get; set; }
 
-        /// <summary>
-        ///   Gets or sets the february.
-        /// </summary>
-        /// <value> The february values. </value>
-        [JsonIgnore]
-        public Collection<int> February { get; set; }
-
-        /// <summary>
-        ///   Gets or sets the march.
-        /// </summary>
-        /// <value> The march values. </value>
-        [JsonIgnore]
-        public Collection<int> March { get; set; }
-
-        /// <summary>
-        ///   Gets or sets the april.
-        /// </summary>
-        /// <value> The april. </value>
-        [JsonIgnore]
-        public Collection<int> April { get; set; }
-
-        /// <summary>
-        ///   Gets or sets the may.
-        /// </summary>
-        /// <value> The may. </value>
-        [JsonIgnore]
-        public Collection<int> May { get; set; }
-
-        /// <summary>
-        ///   Gets or sets the june.
-        /// </summary>
-        /// <value> The june. </value>
-        [JsonIgnore]
-        public Collection<int> June { get; set; }
-
-        /// <summary>
-        ///   Gets or sets the july.
-        /// </summary>
-        /// <value> The july. </value>
-        [JsonIgnore]
-        public Collection<int> July { get; set; }
-
-        /// <summary>
-        ///   Gets or sets the august.
-        /// </summary>
-        /// <value> The august. </value>
-        [JsonIgnore]
-        public Collection<int> August { get; set; }
-
-        /// <summary>
-        ///   Gets or sets the september.
-        /// </summary>
-        /// <value> The september. </value>
-        [JsonIgnore]
-        public Collection<int> September { get; set; }
-
-        /// <summary>
-        ///   Gets or sets the october.
-        /// </summary>
-        /// <value> The october. </value>
-        [JsonIgnore]
-        public Collection<int> October { get; set; }
-
-        /// <summary>
-        ///   Gets or sets the november.
-        /// </summary>
-        /// <value> The november. </value>
-        [JsonIgnore]
-        public Collection<int> November { get; set; }
-
-        /// <summary>
-        ///   Gets or sets the december.
-        /// </summary>
-        /// <value> The december. </value>
-        [JsonIgnore]
-        public Collection<int> December { get; set; }
+        private double _januaryTotal,
+            _februaryTotal,
+            _marchTotal,
+            _aprilTotal,
+            _mayTotal,
+            _septemberTotal,
+            _octoberTotal,
+            _novemberTotal,
+            _decemberTotal,
+            _augustTotal,
+            _julyTotal,
+            _juneTotal;
 
         /// <summary>
         ///   Gets the jan average.
         /// </summary>
         /// <value> The jan average. </value>
         [JsonProperty("january")]
-        public double JanAverage
+        public double January
         {
-            get { return January.Average(); }
+            get { return Average(_januaryTotal); }
+            set { _januaryTotal = value; }
         }
 
         /// <summary>
@@ -127,9 +39,10 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The feb average. </value>
         [JsonProperty("february")]
-        public double FebAverage
+        public double February
         {
-            get { return February.Average(); }
+            get { return Average(_februaryTotal); }
+            set { _februaryTotal = value; }
         }
 
         /// <summary>
@@ -137,9 +50,10 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The march average. </value>
         [JsonProperty("march")]
-        public double MarchAverage
+        public double March
         {
-            get { return March.Average(); }
+            get { return Average(_marchTotal); }
+            set { _marchTotal = value; }
         }
 
         /// <summary>
@@ -147,9 +61,10 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The april average. </value>
         [JsonProperty("april")]
-        public double AprilAverage
+        public double April
         {
-            get { return April.Average(); }
+            get { return Average(_aprilTotal); }
+            set { _aprilTotal = value; }
         }
 
         /// <summary>
@@ -157,9 +72,10 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The may average. </value>
         [JsonProperty("may")]
-        public double MayAverage
+        public double May
         {
-            get { return May.Average(); }
+            get { return Average(_mayTotal); }
+            set { _mayTotal = value; }
         }
 
         /// <summary>
@@ -167,9 +83,10 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The june average. </value>
         [JsonProperty("june")]
-        public double JuneAverage
+        public double June
         {
-            get { return June.Average(); }
+            get { return Average(_juneTotal); }
+            set { _juneTotal = value; }
         }
 
         /// <summary>
@@ -177,9 +94,10 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The july average. </value>
         [JsonProperty("july")]
-        public double JulyAverage
+        public double July
         {
-            get { return July.Average(); }
+            get { return Average(_julyTotal); }
+            set { _julyTotal = value; }
         }
 
         /// <summary>
@@ -187,9 +105,10 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The august average. </value>
         [JsonProperty("august")]
-        public double AugustAverage
+        public double August
         {
-            get { return August.Average(); }
+            get { return Average(_augustTotal); }
+            set { _augustTotal = value; }
         }
 
         /// <summary>
@@ -197,9 +116,10 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The september average. </value>
         [JsonProperty("september")]
-        public double SeptemberAverage
+        public double September
         {
-            get { return September.Average(); }
+            get { return Average(_septemberTotal); }
+            set { _septemberTotal = value; }
         }
 
         /// <summary>
@@ -207,9 +127,10 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The october average. </value>
         [JsonProperty("october")]
-        public double OctoberAverage
+        public double October
         {
-            get { return October.Average(); }
+            get { return Average(_octoberTotal); }
+            set { _octoberTotal = value; }
         }
 
         /// <summary>
@@ -217,9 +138,11 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The november average. </value>
         [JsonProperty("november")]
-        public double NovemberAverage
+        public double November
         {
-            get { return November.Average(); }
+            get { return Average(_novemberTotal); }
+
+            set { _novemberTotal = value; }
         }
 
         /// <summary>
@@ -227,9 +150,18 @@ namespace SolarCalculator.Models.Date
         /// </summary>
         /// <value> The december average. </value>
         [JsonProperty("december")]
-        public double DecemberAverage
+        public double December
         {
-            get { return December.Average(); }
+            get { return Average(_decemberTotal); }
+            set { _decemberTotal = value; }
+        }
+
+        private double Average(double value)
+        {
+            if (Points == 0)
+                return 0;
+
+            return value / Points;
         }
     }
 }

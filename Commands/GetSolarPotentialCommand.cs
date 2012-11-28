@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
+using SolarCalculator.Extensions;
 using SolarCalculator.Infastructure.Commands;
 using SolarCalculator.Models;
 using SolarCalculator.Models.Date;
@@ -56,6 +57,7 @@ namespace SolarCalculator.Commands
             while ((feature = cursor.NextFeature()) != null)
             {
                 solarPotential.InputArea++;
+                solarPotential.Radiation.Points++;
 
                 var annualDuration = GetValue(_propertyValueIndexMap
                                                   .SingleOrDefault(x => x.Key.Month == Month.Annual).Value.Index,
@@ -64,6 +66,7 @@ namespace SolarCalculator.Commands
                 if (annualDuration > _durationThreshhold)
                 {
                     solarPotential.AreaUsedInCalculation++;
+                    solarPotential.Duration.Points++;
 
                     foreach (var item in _propertyValueIndexMap.Where(x => x.Key.Month != Month.Annual))
                     {
@@ -116,12 +119,15 @@ namespace SolarCalculator.Commands
         private static void AddValueForMonth(AnnualSolarPotential instance, Month month, int value)
         {
             var instanceType = instance.GetType();
-            var property = instanceType.GetProperty(month.ToString(),
-                                                    BindingFlags.Public | BindingFlags.Instance);
+            var field = instanceType.GetField("_{0}Total".With(month.ToString().ToLower()),
+                                              BindingFlags.NonPublic | BindingFlags.Instance);
 
-            var methodInfo = property.PropertyType.GetMethod("Add");
+            int currentValue;
+            if (!int.TryParse(field.GetValue(instance).ToString(), out currentValue))
+                throw new ArgumentException("Total value for {0} {1} would not parse to int.".With(field.Name,
+                                                                                                   month.ToString()));
 
-            methodInfo.Invoke(property.GetValue(instance, null), new object[] {value});
+            field.SetValue(instance, currentValue + value);
         }
 
         /// <summary>
