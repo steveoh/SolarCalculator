@@ -1,4 +1,5 @@
 #region License
+
 // 
 // Copyright (C) 2012 AGRC
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
@@ -16,10 +17,11 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
+
 #endregion
+
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using ESRI.ArcGIS.Geodatabase;
@@ -142,9 +144,9 @@ namespace SolarCalculator.Commands
             var field = instanceType.GetField("_{0}Total".With(month.ToString().ToLower()),
                                               BindingFlags.NonPublic | BindingFlags.Instance);
 
-            if(field == null)
+            if (field == null)
                 throw new ArgumentException("field is null {0}".With(month.ToString()));
-            
+
             int currentValue;
             if (!int.TryParse(field.GetValue(instance).ToString(), out currentValue))
                 throw new ArgumentException("Total value for {0} {1} would not parse to int.".With(field.Name,
