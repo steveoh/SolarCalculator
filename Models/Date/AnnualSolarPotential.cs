@@ -7,21 +7,25 @@ namespace SolarCalculator.Models.Date
     /// </summary>
     public class AnnualSolarPotential
     {
+        private double _aprilTotal;
+
+        private double _augustTotal;
+
+        private double _decemberTotal;
+        private double _februaryTotal;
+        private double _januaryTotal;
+
+        private double _julyTotal,
+                       _juneTotal;
+
+        private double _marchTotal;
+        private double _mayTotal;
+        private double _novemberTotal;
+        private double _octoberTotal;
+        private double _septemberTotal;
+
         [JsonIgnore]
         public int Points { get; set; }
-
-        private double _januaryTotal,
-            _februaryTotal,
-            _marchTotal,
-            _aprilTotal,
-            _mayTotal,
-            _septemberTotal,
-            _octoberTotal,
-            _novemberTotal,
-            _decemberTotal,
-            _augustTotal,
-            _julyTotal,
-            _juneTotal;
 
         /// <summary>
         ///   Gets the jan average.
@@ -161,7 +165,7 @@ namespace SolarCalculator.Models.Date
             if (Points == 0)
                 return 0;
 
-            return value / Points;
+            return value/Points;
         }
     }
 }
