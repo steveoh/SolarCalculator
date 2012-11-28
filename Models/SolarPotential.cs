@@ -32,14 +32,14 @@ namespace SolarCalculator.Models
         ///   Gets or sets the input area.
         /// </summary>
         /// <value> The square meters of input area. </value>
-        [JsonProperty("inputArea")]
+        [JsonProperty("inputDurationArea")]
         public int InputArea { get; set; }
 
         /// <summary>
         ///   Gets or sets the area used in calculation.
         /// </summary>
         /// <value> The square meters of solar analysis points used in the calculations. Where the duration amount was greater than the threshold.. </value>
-        [JsonProperty("qualifyingArea")]
+        [JsonProperty("qualifyingDurationArea")]
         public int AreaUsedInCalculation { get; set; }
     }
 }
