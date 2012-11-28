@@ -26,7 +26,7 @@ namespace SolarCalculator.Endpoints
 
         public override string ToString()
         {
-            return "";
+            return string.Format("{0}, Duration Threshhold: {1}", "GetSolarPotentialCommand", _durationThreshhold);
         }
 
         protected override void Execute()
