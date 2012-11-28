@@ -4,7 +4,7 @@ using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Server;
 using SolarCalculator.Infastructure.Commands;
 
-namespace SolarCalculator
+namespace SolarCalculator.Commands
 {
     /// <summary>
     ///   Finds the layer in the soe host mxd

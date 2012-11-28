@@ -27,7 +27,7 @@ namespace SolarCalculator
         Properties =
             "January.Duration=;February.Duration=;March.Duration=;April.Duration=;May.Duration=;June.Duration=;July.Duration=;August.Duration=;September.Duration=;October.Duration=;November.Duration=;December.Duration=;" +
             "January.Radiation=;February.Radiation=;March.Radiation=;April.Radiation=;May.Radiation=;June.Radiation=;July.Radiation=;August.Radiation=;September.Radiation=;October.Radiation=;November.Radiation=;December.Radiation=;" +
-            "LayerName=",
+            "LayerName=;Annual.Duration=",
         SupportsREST = true,
         SupportsSOAP = false)]
     public class SolarCalculatorSoe : SoeBase, IServerObjectExtension, IObjectConstruct, IRESTRequestHandler
@@ -52,8 +52,9 @@ namespace SolarCalculator
             base.Construct(props);
 
             const string properties =
-                "January.Duration=DUR1;February.Duration=;March.Duration=;April.Duration=;May.Duration=;June.Duration=;July.Duration=;August.Duration=;September.Duration=;October.Duration=;November.Duration=;December.Duration=;" +
-                "January.Radiation=;February.Radiation=;March.Radiation=;April.Radiation=;May.Radiation=;June.Radiation=;July.Radiation=;August.Radiation=;September.Radiation=;October.Radiation=;November.Radiation=;December.Radiation=";
+                "January.Duration=;February.Duration=;March.Duration=;April.Duration=;May.Duration=;June.Duration=;July.Duration=;August.Duration=;September.Duration=;October.Duration=;November.Duration=;December.Duration=;" +
+                "January.Radiation=;February.Radiation=;March.Radiation=;April.Radiation=;May.Radiation=;June.Radiation=;July.Radiation=;August.Radiation=;September.Radiation=;October.Radiation=;November.Radiation=;December.Radiation=;" +
+                "Annual.Duration=";
 #if DEBUG
             var propertyValueMap = new Dictionary<MonthTypeContainer, string>
                 {
@@ -80,7 +81,8 @@ namespace SolarCalculator
                     {new MonthTypeContainer("September", "Radiation"), "SOL9"},
                     {new MonthTypeContainer("October", "Radiation"), "SOL10"},
                     {new MonthTypeContainer("November", "Radiation"), "SOL11"},
-                    {new MonthTypeContainer("December", "Radiation"), "SOL12"}
+                    {new MonthTypeContainer("December", "Radiation"), "SOL12"},
+                    {new MonthTypeContainer("Annual", "Duration"), "DURANN"}
                 };
 
             const string layerName = "SolarPoints";

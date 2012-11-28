@@ -3,7 +3,7 @@ using ESRI.ArcGIS.Geodatabase;
 using SolarCalculator.Infastructure.Commands;
 using SolarCalculator.Models.Date;
 
-namespace SolarCalculator
+namespace SolarCalculator.Commands
 {
     /// <summary>
     ///   Command to find the index for each attribute name for all month/types

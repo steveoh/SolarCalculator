@@ -77,6 +77,8 @@
     <Compile Include="Commands\CreateEnumsFromPropertyStringsCommand.cs" />
     <Compile Include="Commands\CreateRestImplementationCommand.cs" />
     <Compile Include="Commands\FindAllEndpointsCommand.cs" />
+    <Compile Include="Commands\FindIndexByFieldNameCommand.cs" />
+    <Compile Include="Commands\FindLayerByNameCommand.cs" />
     <Compile Include="Commands\GetSolarPotentialCommand.cs" />
     <Compile Include="Endpoints\VersionEndpoint.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
@@ -84,8 +86,6 @@
     <Compile Include="Extensions\PropertySetExensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\ThrowHelper.cs" />
-    <Compile Include="FindIndexByFieldNameCommand.cs" />
-    <Compile Include="FindLayerByNameCommand.cs" />
     <Compile Include="IndexFieldMap.cs" />
     <Compile Include="Infastructure\Commands\Command.cs" />
     <Compile Include="Infastructure\Commands\CommandExecutor.cs" />
