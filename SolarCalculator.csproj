@@ -81,18 +81,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\EndpointAttribute.cs" />
+    <Compile Include="Commands\BuildPolygonFromPointsCommand.cs" />
+    <Compile Include="Commands\CreateEnumsFromPropertyStringsCommand.cs" />
     <Compile Include="Commands\CreateRestImplementationCommand.cs" />
     <Compile Include="Commands\FindAllEndpointsCommand.cs" />
+    <Compile Include="DataStructures\SolarPotential.cs" />
+    <Compile Include="Endpoints\GetSolarPotentialCommand.cs" />
     <Compile Include="Endpoints\IRestEndpoint.cs" />
+    <Compile Include="Endpoints\JsonEndpoint.cs" />
+    <Compile Include="Endpoints\VersionEndpoint.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\PropertySetExensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="FindIndexByFieldNameCommand.cs" />
+    <Compile Include="FindLayerByNameCommand.cs" />
+    <Compile Include="IndexFieldMap.cs" />
     <Compile Include="Infastructure\Command.cs" />
     <Compile Include="Infastructure\CommandExecutor.cs" />
+    <Compile Include="Models\AreaOfInterest.cs" />
+    <Compile Include="Models\Enums\CalendarMonth.cs" />
+    <Compile Include="Models\Enums\SolarType.cs" />
+    <Compile Include="Models\Esri\ApplicationCache.cs" />
+    <Compile Include="Models\SolarPotential.cs" />
+    <Compile Include="Models\Esri\ErrorModel.cs" />
+    <Compile Include="Models\SolarContainer.cs" />
+    <Compile Include="MonthTypeContainer.cs" />
     <Compile Include="SoeBase.cs" />
     <Compile Include="Endpoints\SolarCalculatorRestEndpoint.cs" />
     <Compile Include="SolarCalculatorSoe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VersionEndpoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mykey.snk" />
@@ -120,6 +138,10 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Existing\OldService.txt" />
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <ZipFileExtension>soe</ZipFileExtension>
     <AddInTargetProduct>Server</AddInTargetProduct>
@@ -130,7 +152,7 @@
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.MonthAndDayStamp" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" />
+      <UserProperties BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_BuildVersioningStyle="None.None.Increment.MonthAndDayStamp" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

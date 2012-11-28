@@ -1,0 +1,260 @@
+﻿public SolarGrouping GetSolarValues(string json)
+    {
+        DateTime start = DateTime.Now;
+        SolarValues returnValues = new SolarValues();
+        IServerContext context = null;
+        IWorkspace workspace = null;
+
+        //testing
+        //SolarParams solarParams = new SolarParams() { durThresh = "300", poly = new string[] { "-118.826745", "40.711822", "-111.826741", "40.711736", "-111.826631", "40.711737", "-111.826641", "40.711847" }, userName = "steve" };
+
+        DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(SolarParams));
+        MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(json));
+        SolarParams solarParams = (SolarParams)ser.ReadObject(ms);
+
+        GDBConnect.ConnectToLocalGDB(out workspace, out context, @"C:\inetpub\wwwroot\serverprojects\MapData\Solar\SolarAnalysisPoints.gdb");
+
+        //create polygon from points
+        IPoint point = null;
+        ISpatialReferenceFactory spatRefFactory = context.CreateObject("esriGeometry.SpatialReferenceEnvironment") as ISpatialReferenceFactory;
+        IGeographicCoordinateSystem geographicCoordSys = context.CreateObject("esriGeometry.GeographicCoordinateSystem") as IGeographicCoordinateSystem;
+        ISpatialReference refutm = spatRefFactory.CreateProjectedCoordinateSystem(26912);
+        geographicCoordSys = spatRefFactory.CreateGeographicCoordinateSystem(4269);//esriSRGeoCS_NAD1983
+
+        IPointCollection queryPolygon = context.CreateObject("esriGeometry.Polygon") as IPointCollection;
+        IGeometry geoSpRef = null;
+        ITopologicalOperator2 topoOp = context.CreateObject("esriGeometry.Polygon") as ITopologicalOperator2;
+        geoSpRef = queryPolygon as IGeometry;
+        geoSpRef.SpatialReference = geographicCoordSys;
+
+        object o = Type.Missing;
+
+        for (int i = 0; i < solarParams.poly.Count() - 1; i = i + 2)
+        {
+            point = context.CreateObject("esriGeometry.Point") as IPoint;
+            point.X = System.Double.Parse(solarParams.poly[i]);
+            point.Y = System.Double.Parse(solarParams.poly[i + 1]);
+            queryPolygon.AddPoint(point, ref o, ref o);
+        }
+
+        topoOp = queryPolygon as ITopologicalOperator2;
+        topoOp.Simplify();
+
+        //put the poly in the same spatial reference as rasters
+        IPolygon projectedPolygon = context.CreateObject("esriGeometry.Polygon") as IPolygon;
+        projectedPolygon = queryPolygon as IPolygon;
+        projectedPolygon.Project(refutm);
+
+        //1 acre
+        double area = ((IArea)projectedPolygon).Area;
+        const double oneAcre = 4046.85642;
+        if (area > oneAcre * 3)
+        {
+            throw new Microsoft.ServiceModel.Web.WebProtocolException(
+                HttpStatusCode.BadRequest,
+                string.Format("Area too large ({0} acres). Must be equal to or smaller than 3 acre.", (area / oneAcre).ToString()),
+                null);
+        }
+
+        IFeatureWorkspace featureWS = workspace as IFeatureWorkspace;
+        IFeatureClass featureClass = featureWS.OpenFeatureClass("AggregatedSolarGrid");
+
+        ESRI.ArcGIS.Geodatabase.ISpatialFilter spatFilter = (ESRI.ArcGIS.Geodatabase.ISpatialFilter)context.CreateObject("esriGeoDatabase.SpatialFilter");
+        spatFilter.SpatialRel = ESRI.ArcGIS.Geodatabase.esriSpatialRelEnum.esriSpatialRelIntersects;
+        spatFilter.Geometry = projectedPolygon;
+
+        ESRI.ArcGIS.Geodatabase.IFeatureCursor fCursor = null;
+        try
+        {
+            fCursor = featureClass.Search(spatFilter, true);
+        }
+        catch (Exception)
+        {
+            context.ReleaseContext();
+            throw new Microsoft.ServiceModel.Web.WebProtocolException(
+                HttpStatusCode.ServiceUnavailable,
+                "Error querying solar point data",
+                null);
+        }
+
+        ESRI.ArcGIS.Geodatabase.IFields fields = featureClass.Fields;
+        ESRI.ArcGIS.Geodatabase.IFeature feature;
+
+        try
+        {
+            feature = fCursor.NextFeature();
+        }
+        catch (Exception)
+        {
+            context.ReleaseContext();
+            throw new Microsoft.ServiceModel.Web.WebProtocolException(
+                HttpStatusCode.ServiceUnavailable,
+                "Error querying solar point data",
+                null);
+        }
+
+        if (feature == null)
+        {
+            context.ReleaseContext();
+            throw new Microsoft.ServiceModel.Web.WebProtocolException(
+                HttpStatusCode.ServiceUnavailable,
+                "No solar data found.  There is currently only data in the Salt Lake City region.",
+                null);
+        }
+
+        SolarValueHolder solarHolder = new SolarValueHolder();
+
+        while (feature != null)
+        {
+            int threshold = 0;
+            int.TryParse(solarParams.durThresh, out threshold);
+
+            solarHolder.AddFeatureValues(feature, threshold);
+            feature = fCursor.NextFeature();
+        }
+
+        returnValues.durArea = solarHolder.DurationArea;
+        returnValues.directDur = solarHolder.GetDirectDurationAverages();
+        returnValues.directRad = solarHolder.GetDirectRadiationAverages();
+
+        context.ReleaseContext();
+        DateTime stop = DateTime.Now;
+        TimeSpan duration = stop - start;
+
+        returnValues.time = duration.TotalSeconds.ToString();
+
+        return new SolarGrouping() { SolarValues = returnValues };
+    }
+
+    public class SolarValueHolder
+    {
+        public List<int> DirectDuration1 { get; set; }
+        public List<int> DirectRadiation1 { get; set; }
+        public List<int> DirectDuration2 { get; set; }
+        public List<int> DirectRadiation2 { get; set; }
+        public List<int> DirectDuration3 { get; set; }
+        public List<int> DirectRadiation3 { get; set; }
+        public List<int> DirectDuration4 { get; set; }
+        public List<int> DirectRadiation4 { get; set; }
+        public List<int> DirectDuration5 { get; set; }
+        public List<int> DirectRadiation5 { get; set; }
+        public List<int> DirectDuration6 { get; set; }
+        public List<int> DirectRadiation6 { get; set; }
+        public List<int> DirectDuration7 { get; set; }
+        public List<int> DirectRadiation7 { get; set; }
+        public List<int> DirectDuration8 { get; set; }
+        public List<int> DirectRadiation8 { get; set; }
+        public List<int> DirectDuration9 { get; set; }
+        public List<int> DirectRadiation9 { get; set; }
+        public List<int> DirectDuration10 { get; set; }
+        public List<int> DirectRadiation10 { get; set; }
+        public List<int> DirectDuration11 { get; set; }
+        public List<int> DirectRadiation11 { get; set; }
+        public List<int> DirectDuration12 { get; set; }
+        public List<int> DirectRadiation12 { get; set; }
+        public int DurationArea { get; set; }
+
+        public SolarValueHolder()
+        {
+            this.DirectDuration1 = new List<int>();
+            this.DirectRadiation1 = new List<int>();
+            this.DirectDuration2 = new List<int>();
+            this.DirectRadiation2 = new List<int>();
+            this.DirectDuration3 = new List<int>();
+            this.DirectRadiation3 = new List<int>();
+            this.DirectDuration4 = new List<int>();
+            this.DirectRadiation4 = new List<int>();
+            this.DirectDuration5 = new List<int>();
+            this.DirectRadiation5 = new List<int>();
+            this.DirectDuration6 = new List<int>();
+            this.DirectRadiation6 = new List<int>();
+            this.DirectDuration7 = new List<int>();
+            this.DirectRadiation7 = new List<int>();
+            this.DirectDuration8 = new List<int>();
+            this.DirectRadiation8 = new List<int>();
+            this.DirectDuration9 = new List<int>();
+            this.DirectRadiation9 = new List<int>();
+            this.DirectDuration10 = new List<int>();
+            this.DirectRadiation10 = new List<int>();
+            this.DirectDuration11 = new List<int>();
+            this.DirectRadiation11 = new List<int>();
+            this.DirectDuration12 = new List<int>();
+            this.DirectRadiation12 = new List<int>();
+        }
+
+        public void AddFeatureValues(IFeature feature, int threshold)
+        {
+            DirectDuration1.Add(Convert.ToInt32(feature.get_Value(14)));
+            DirectDuration2.Add(Convert.ToInt32(feature.get_Value(15)));
+            DirectDuration3.Add(Convert.ToInt32(feature.get_Value(16)));
+            DirectDuration4.Add(Convert.ToInt32(feature.get_Value(17)));
+            DirectDuration5.Add(Convert.ToInt32(feature.get_Value(18)));
+            DirectDuration6.Add(Convert.ToInt32(feature.get_Value(19)));
+            DirectDuration7.Add(Convert.ToInt32(feature.get_Value(20)));
+            DirectDuration8.Add(Convert.ToInt32(feature.get_Value(21)));
+            DirectDuration9.Add(Convert.ToInt32(feature.get_Value(22)));
+            DirectDuration10.Add(Convert.ToInt32(feature.get_Value(23)));
+            DirectDuration11.Add(Convert.ToInt32(feature.get_Value(24)));
+            DirectDuration12.Add(Convert.ToInt32(feature.get_Value(25)));
+
+            DirectRadiation1.Add(Convert.ToInt32(feature.get_Value(2)));
+            DirectRadiation2.Add(Convert.ToInt32(feature.get_Value(3)));
+            DirectRadiation3.Add(Convert.ToInt32(feature.get_Value(4)));
+            DirectRadiation4.Add(Convert.ToInt32(feature.get_Value(5)));
+            DirectRadiation5.Add(Convert.ToInt32(feature.get_Value(6)));
+            DirectRadiation6.Add(Convert.ToInt32(feature.get_Value(7)));
+            DirectRadiation7.Add(Convert.ToInt32(feature.get_Value(8)));
+            DirectRadiation8.Add(Convert.ToInt32(feature.get_Value(9)));
+            DirectRadiation9.Add(Convert.ToInt32(feature.get_Value(10)));
+            DirectRadiation10.Add(Convert.ToInt32(feature.get_Value(11)));
+            DirectRadiation11.Add(Convert.ToInt32(feature.get_Value(12)));
+            DirectRadiation12.Add(Convert.ToInt32(feature.get_Value(13)));
+
+            int annualDuration = Convert.ToInt32(feature.get_Value(27));
+
+            if (annualDuration > threshold)
+            {
+                this.DurationArea++;
+            }
+        }
+
+        public int[] GetDirectDurationAverages()
+        {
+            List<int> averageList = new List<int>();
+
+            averageList.Add((int)DirectDuration1.Average());
+            averageList.Add((int)DirectDuration2.Average());
+            averageList.Add((int)DirectDuration3.Average());
+            averageList.Add((int)DirectDuration4.Average());
+            averageList.Add((int)DirectDuration5.Average());
+            averageList.Add((int)DirectDuration6.Average());
+            averageList.Add((int)DirectDuration7.Average());
+            averageList.Add((int)DirectDuration8.Average());
+            averageList.Add((int)DirectDuration9.Average());
+            averageList.Add((int)DirectDuration10.Average());
+            averageList.Add((int)DirectDuration11.Average());
+            averageList.Add((int)DirectDuration12.Average());
+
+            return averageList.ToArray();
+        }
+
+        public int[] GetDirectRadiationAverages()
+        {
+            List<int> averageList = new List<int>();
+
+            averageList.Add((int)DirectRadiation1.Average());
+            averageList.Add((int)DirectRadiation2.Average());
+            averageList.Add((int)DirectRadiation3.Average());
+            averageList.Add((int)DirectRadiation4.Average());
+            averageList.Add((int)DirectRadiation5.Average());
+            averageList.Add((int)DirectRadiation6.Average());
+            averageList.Add((int)DirectRadiation7.Average());
+            averageList.Add((int)DirectRadiation8.Average());
+            averageList.Add((int)DirectRadiation9.Average());
+            averageList.Add((int)DirectRadiation10.Average());
+            averageList.Add((int)DirectRadiation11.Average());
+            averageList.Add((int)DirectRadiation12.Average());
+
+            return averageList.ToArray();
+        }
+    }

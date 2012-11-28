@@ -12,7 +12,6 @@ namespace SolarCalculator
         public IPropertySet ConfigProps;
         public IRESTRequestHandler ReqHandler;
         public IServerObjectHelper ServerObjectHelper;
-        public static ServerLogger Logger;
 
         /// <summary>
         ///   Gets the schema.
@@ -41,7 +40,6 @@ namespace SolarCalculator
         public virtual void Shutdown()
         {
             ServerObjectHelper = null;
-            Logger = null;
         }
 
         /// <summary>
@@ -53,7 +51,6 @@ namespace SolarCalculator
         /// <param name="serverObjectHelper"> The server object helper. </param>
         public virtual void Init(IServerObjectHelper serverObjectHelper)
         {
-            Logger = new ServerLogger();
             ServerObjectHelper = serverObjectHelper;
         }
 
