@@ -25,21 +25,19 @@ namespace SolarCalculator.Infastructure
             {
                 Debug.Print("Executing\r\n{0}".With(commandName));
                 Logger.LogMessage(ServerLogger.msgType.debug, "{0}.{1}".With(commandName, "execute"), MessageCode,
-                                          "Executing\r\n{0}".With(commandName));
+                                  "Executing\r\n{0}".With(commandName));
 
                 Execute();
                 Debug.Print("Done Executing\r\n{0}".With(commandName));
 
                 Logger.LogMessage(ServerLogger.msgType.debug, "{0}.{1}".With(commandName, "execute"), MessageCode,
-                                          "Done Executing");
-
-                
+                                  "Done Executing");
             }
             catch (Exception ex)
             {
                 Debug.Print("Error processing task: {0}".With(commandName), ex);
                 Logger.LogMessage(ServerLogger.msgType.error, "{0}.{1}".With(commandName, "execute"), MessageCode,
-                                          "Error running command");
+                                  "Error running command");
             }
             finally
             {
@@ -66,11 +64,11 @@ namespace SolarCalculator.Infastructure
         public T GetResult()
         {
             Run();
-            
+
             Logger = new ServerLogger();
 
             Logger.LogMessage(ServerLogger.msgType.debug, ToString(), MessageCode,
-                                      "Done Executing\r\n{0}\r\nResult: {1}".With(ToString(), Result));
+                              "Done Executing\r\n{0}\r\nResult: {1}".With(ToString(), Result));
             Logger = null;
 
             return Result;

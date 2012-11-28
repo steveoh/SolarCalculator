@@ -17,7 +17,7 @@ namespace SolarCalculator.Extensions
 
                 var logger = new ServerLogger();
                 logger.LogMessage(ServerLogger.msgType.warning, "GetPropertyValue", 2472,
-                                          msg);
+                                  msg);
                 logger = null;
 
                 if (errorOnNull)

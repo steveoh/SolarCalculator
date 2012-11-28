@@ -3,8 +3,7 @@ using ESRI.ArcGIS.Geodatabase;
 
 namespace SolarCalculator.Models.Esri
 {
-    /// <summary
-    /// The cached objects for the services
+    /// <summary The cached objects for the services
     /// </summary>
     public static class ApplicationCache
     {

@@ -15,9 +15,9 @@ namespace SolarCalculator
                 throw new ArgumentException("Month is not a calendar month");
             }
 
-            if(!Enum.TryParse(type, out solarType))
+            if (!Enum.TryParse(type, out solarType))
             {
-                throw new ArgumentException("Solar type is not duration or radiation"); 
+                throw new ArgumentException("Solar type is not duration or radiation");
             }
 
             Month = calendarMonth;

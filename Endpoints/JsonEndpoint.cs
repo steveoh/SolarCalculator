@@ -1,5 +1,4 @@
 using System.Text;
-using ESRI.ArcGIS.SOESupport;
 using Newtonsoft.Json;
 
 namespace SolarCalculator.Endpoints

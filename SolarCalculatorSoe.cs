@@ -4,7 +4,6 @@ using ESRI.ArcGIS.SOESupport;
 using ESRI.ArcGIS.Server;
 using ESRI.ArcGIS.esriSystem;
 using SolarCalculator.Commands;
-using SolarCalculator.Extensions;
 using SolarCalculator.Infastructure;
 using SolarCalculator.Models.Esri;
 

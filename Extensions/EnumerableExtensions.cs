@@ -6,7 +6,7 @@ using System.Linq;
 namespace SolarCalculator.Extensions
 {
     /// <summary>
-    /// Stole from the unsigned project morelinq : http://code.google.com/p/morelinq/
+    ///   Stole from the unsigned project morelinq : http://code.google.com/p/morelinq/
     /// </summary>
     public static class EnumerableExtensions
     {
@@ -83,35 +83,6 @@ namespace SolarCalculator.Extensions
             if (bucket != null && count > 0)
             {
                 yield return resultSelector(bucket.Take(count));
-            }
-        }
-
-
-    }
-
-    internal static class ThrowHelper
-    {
-        internal static void ThrowIfNull<T>(this T argument, string name) where T : class
-        {
-            if (argument == null)
-            {
-                throw new ArgumentNullException(name);
-            }
-        }
-
-        internal static void ThrowIfNegative(this int argument, string name)
-        {
-            if (argument < 0)
-            {
-                throw new ArgumentOutOfRangeException(name);
-            }
-        }
-
-        internal static void ThrowIfNonPositive(this int argument, string name)
-        {
-            if (argument <= 0)
-            {
-                throw new ArgumentOutOfRangeException(name);
             }
         }
     }

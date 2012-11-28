@@ -5,11 +5,11 @@ using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.SOESupport;
 using SolarCalculator.Attributes;
 using SolarCalculator.Commands;
+using SolarCalculator.DataStructures;
 using SolarCalculator.Extensions;
 using SolarCalculator.Infastructure;
 using SolarCalculator.Models;
 using SolarCalculator.Models.Esri;
-using SolarPotential = SolarCalculator.DataStructures.SolarPotential;
 
 namespace SolarCalculator.Endpoints
 {

@@ -76,13 +76,15 @@ namespace SolarCalculator.Commands
         {
             coordinatePairs = coordinatePairs.ToList();
 
-            double x,y;
+            double x, y;
 
-            if(!double.TryParse(coordinatePairs.FirstOrDefault().ToString(CultureInfo.InvariantCulture), out x))
-                throw new ArgumentException("x coordinate cannot be cast to a double {0}".With(coordinatePairs.FirstOrDefault()));
+            if (!double.TryParse(coordinatePairs.FirstOrDefault().ToString(CultureInfo.InvariantCulture), out x))
+                throw new ArgumentException(
+                    "x coordinate cannot be cast to a double {0}".With(coordinatePairs.FirstOrDefault()));
 
-            if(!double.TryParse(coordinatePairs.LastOrDefault().ToString(CultureInfo.InvariantCulture), out y))
-                throw new ArgumentException("x coordinate cannot be cast to a double {0}".With(coordinatePairs.FirstOrDefault()));
+            if (!double.TryParse(coordinatePairs.LastOrDefault().ToString(CultureInfo.InvariantCulture), out y))
+                throw new ArgumentException(
+                    "x coordinate cannot be cast to a double {0}".With(coordinatePairs.FirstOrDefault()));
 
             _points.AddPoint(new PointClass
                 {

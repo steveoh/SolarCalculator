@@ -12,12 +12,13 @@ namespace SolarCalculator.Endpoints
 {
     public class GetSolarPotentialCommand : Command<SolarPotential>
     {
+        private readonly double _durationThreshhold;
         private readonly IPolygon4 _polygon;
         private readonly Dictionary<MonthTypeContainer, IndexFieldMap> _propertyValueIndexMap;
-        private readonly double _durationThreshhold;
 
         public GetSolarPotentialCommand(IPolygon4 polygon,
-                                        Dictionary<MonthTypeContainer, IndexFieldMap> propertyValueIndexMap, double durationThreshhold)
+                                        Dictionary<MonthTypeContainer, IndexFieldMap> propertyValueIndexMap,
+                                        double durationThreshhold)
         {
             _polygon = polygon;
             _propertyValueIndexMap = propertyValueIndexMap;
@@ -55,13 +56,13 @@ namespace SolarCalculator.Endpoints
         }
 
         private void AddValueToSolarPotential(KeyValuePair<MonthTypeContainer, IndexFieldMap> item,
-                                                     IFeature feature, SolarPotential solarPotential)
+                                              IFeature feature, SolarPotential solarPotential)
         {
             var solarValue = GetValue(item.Value.Index, feature);
             switch (item.Key.SolarType)
             {
                 case SolarType.Duration:
-                    if(solarValue > _durationThreshhold)
+                    if (solarValue > _durationThreshhold)
                         AddValueForMonth(solarPotential.Duration, item.Key.Month, solarValue);
                     break;
                 case SolarType.Radiation:
@@ -75,12 +76,12 @@ namespace SolarCalculator.Endpoints
         private static void AddValueForMonth(CalendarMonths instance, CalendarMonth month, int value)
         {
             var instanceType = instance.GetType();
-            var property = instanceType.GetProperty(month.ToString(), 
-                BindingFlags.Public | BindingFlags.Instance);
+            var property = instanceType.GetProperty(month.ToString(),
+                                                    BindingFlags.Public | BindingFlags.Instance);
 
             var methodInfo = property.PropertyType.GetMethod("Add");
 
-            methodInfo.Invoke(property.GetValue(instance, null), new object[] { value });
+            methodInfo.Invoke(property.GetValue(instance, null), new object[] {value});
         }
 
         private static int GetValue(int index, IFeature feature)

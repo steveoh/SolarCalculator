@@ -1,29 +1,28 @@
 using Newtonsoft.Json;
+using SolarCalculator.DataStructures;
 
 namespace SolarCalculator.Models
 {
     /// <summary>
-    /// Container class for sending back statistics
+    ///   Container class for sending back statistics
     /// </summary>
     public class SolarContainer
     {
         public SolarContainer()
         {
-            SolarPotential = new DataStructures.SolarPotential();
+            SolarPotential = new SolarPotential();
         }
 
-        public SolarContainer(DataStructures.SolarPotential solarPotential)
+        public SolarContainer(SolarPotential solarPotential)
         {
             SolarPotential = solarPotential;
         }
 
         /// <summary>
-        /// Gets or sets the solar potential.
+        ///   Gets or sets the solar potential.
         /// </summary>
-        /// <value>
-        /// The solar potential.
-        /// </value>
+        /// <value> The solar potential. </value>
         [JsonProperty("solarPotential")]
-        public DataStructures.SolarPotential SolarPotential { get; set; }
+        public SolarPotential SolarPotential { get; set; }
     }
 }

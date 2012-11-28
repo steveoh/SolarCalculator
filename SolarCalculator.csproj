@@ -70,14 +70,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\EndpointAttribute.cs" />
@@ -85,6 +77,7 @@
     <Compile Include="Commands\CreateEnumsFromPropertyStringsCommand.cs" />
     <Compile Include="Commands\CreateRestImplementationCommand.cs" />
     <Compile Include="Commands\FindAllEndpointsCommand.cs" />
+    <Compile Include="DataStructures\CalendarMonths.cs" />
     <Compile Include="DataStructures\SolarPotential.cs" />
     <Compile Include="Endpoints\GetSolarPotentialCommand.cs" />
     <Compile Include="Endpoints\IRestEndpoint.cs" />
@@ -94,6 +87,7 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\PropertySetExensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\ThrowHelper.cs" />
     <Compile Include="FindIndexByFieldNameCommand.cs" />
     <Compile Include="FindLayerByNameCommand.cs" />
     <Compile Include="IndexFieldMap.cs" />
@@ -103,6 +97,7 @@
     <Compile Include="Models\Enums\CalendarMonth.cs" />
     <Compile Include="Models\Enums\SolarType.cs" />
     <Compile Include="Models\Esri\ApplicationCache.cs" />
+    <Compile Include="Models\Esri\ErrorContainer.cs" />
     <Compile Include="Models\Esri\ErrorModel.cs" />
     <Compile Include="Models\SolarContainer.cs" />
     <Compile Include="MonthTypeContainer.cs" />

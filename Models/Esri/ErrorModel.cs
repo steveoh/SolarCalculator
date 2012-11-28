@@ -9,7 +9,8 @@ namespace SolarCalculator.Models.Esri
             Code = code;
             Message = message;
         }
-        public ErrorModel(int code): this(code, "")
+
+        public ErrorModel(int code) : this(code, "")
         {
         }
 
@@ -24,16 +25,5 @@ namespace SolarCalculator.Models.Esri
         {
             get { return !string.IsNullOrEmpty(Message); }
         }
-    }
-
-    public class ErrorContainer
-    {
-        public ErrorContainer(ErrorModel error)
-        {
-            Error = error;
-        }
-
-        [JsonProperty("error")]
-        public ErrorModel Error { get; set; }
     }
 }

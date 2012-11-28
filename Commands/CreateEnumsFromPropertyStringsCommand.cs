@@ -1,5 +1,4 @@
 using System;
-using ESRI.ArcGIS.SOESupport;
 using SolarCalculator.Infastructure;
 
 namespace SolarCalculator.Commands

@@ -1,7 +1,6 @@
 using System;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
-using ESRI.ArcGIS.SOESupport;
 using ESRI.ArcGIS.Server;
 using SolarCalculator.Infastructure;
 
@@ -20,9 +19,9 @@ namespace SolarCalculator
 
         protected override void Execute()
         {
-                // Get the feature layer to be queried.
-                // Since the layer is a property of the SOE, this only has to be done once.
-                var mapServer = _serverObjectHelper.ServerObject as IMapServer3;
+            // Get the feature layer to be queried.
+            // Since the layer is a property of the SOE, this only has to be done once.
+            var mapServer = _serverObjectHelper.ServerObject as IMapServer3;
 
             if (mapServer == null)
             {
