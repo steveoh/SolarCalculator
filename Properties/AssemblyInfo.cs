@@ -32,8 +32,8 @@ using ESRI.ArcGIS.SOESupport;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.121.1127")]
-[assembly: AssemblyFileVersion("0.1.121.1127")]
+[assembly: AssemblyVersion("0.1.123.1127")]
+[assembly: AssemblyFileVersion("0.1.123.1127")]
 
 [assembly: AddInPackage("SolarCalculator", "f06c4e70-96b0-4d72-a4d5-71ea0d314652",
     Author = "mapserv",

@@ -103,7 +103,6 @@
     <Compile Include="Models\Enums\CalendarMonth.cs" />
     <Compile Include="Models\Enums\SolarType.cs" />
     <Compile Include="Models\Esri\ApplicationCache.cs" />
-    <Compile Include="Models\SolarPotential.cs" />
     <Compile Include="Models\Esri\ErrorModel.cs" />
     <Compile Include="Models\SolarContainer.cs" />
     <Compile Include="MonthTypeContainer.cs" />
@@ -152,7 +151,7 @@
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_BuildVersioningStyle="None.None.Increment.MonthAndDayStamp" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" />
+      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.MonthAndDayStamp" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
