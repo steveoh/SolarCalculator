@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
@@ -56,9 +57,12 @@ namespace SolarCalculator.Commands
             {
                 solarPotential.InputArea++;
 
-                foreach (var item in _propertyValueIndexMap)
+                var annualDuration = GetValue(_propertyValueIndexMap
+                    .SingleOrDefault(x => x.Key.Month == Month.Annual).Value.Index, feature);
+
+                foreach (var item in _propertyValueIndexMap.Where(x=>x.Key.Month != Month.Annual))
                 {
-                    AddValueToSolarPotential(item, feature, solarPotential);
+                    AddValueToSolarPotential(item, feature, solarPotential, annualDuration);
                 }
             }
 
@@ -71,15 +75,15 @@ namespace SolarCalculator.Commands
         /// <param name="item"> The item. </param>
         /// <param name="feature"> The feature. </param>
         /// <param name="solarPotential"> The solar potential. </param>
+        /// <param name="annualDuration"> </param>
         /// <exception cref="System.ArgumentOutOfRangeException"></exception>
-        private void AddValueToSolarPotential(KeyValuePair<MonthTypeContainer, IndexFieldMap> item,
-                                              IFeature feature, SolarPotential solarPotential)
+        private void AddValueToSolarPotential(KeyValuePair<MonthTypeContainer, IndexFieldMap> item, IFeature feature, SolarPotential solarPotential, int annualDuration)
         {
             var solarValue = GetValue(item.Value.Index, feature);
             switch (item.Key.SolarType)
             {
                 case SolarType.Duration:
-                    if (solarValue > _durationThreshhold)
+                    if (annualDuration > _durationThreshhold)
                         AddValueForMonth(solarPotential.Duration, item.Key.Month, solarValue);
                     break;
                 case SolarType.Radiation:

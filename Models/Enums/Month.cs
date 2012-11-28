@@ -16,6 +16,7 @@ namespace SolarCalculator.Models.Enums
         September,
         October,
         November,
-        December
+        December,
+        Annual
     }
 }
