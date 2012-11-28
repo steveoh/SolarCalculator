@@ -2,6 +2,10 @@
 [Bb]in/
 [Oo]bj/
 
+# custom folders
+Data/
+Existing/
+
 # mstest test results
 TestResults
 
