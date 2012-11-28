@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using SolarCalculator.Attributes;
 using SolarCalculator.Extensions;
-using SolarCalculator.Infastructure;
+using SolarCalculator.Infastructure.Commands;
 
 namespace SolarCalculator.Commands
 {

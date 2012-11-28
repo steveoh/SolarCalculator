@@ -2,21 +2,33 @@ using System;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Server;
-using SolarCalculator.Infastructure;
+using SolarCalculator.Infastructure.Commands;
 
 namespace SolarCalculator
 {
+    /// <summary>
+    ///   Finds the layer in the soe host mxd
+    /// </summary>
     public class FindLayerByNameCommand : Command<IFeatureClass>
     {
         private readonly string _layerName;
         private readonly IServerObjectHelper _serverObjectHelper;
 
+        /// <summary>
+        ///   Initializes a new instance of the <see cref="FindLayerByNameCommand" /> class.
+        /// </summary>
+        /// <param name="layerName"> Name of the layer. </param>
+        /// <param name="serverObjectHelper"> The server object helper. </param>
         public FindLayerByNameCommand(string layerName, IServerObjectHelper serverObjectHelper)
         {
             _layerName = layerName;
             _serverObjectHelper = serverObjectHelper;
         }
 
+        /// <summary>
+        ///   code to execute when command is run. Searches through the host for the layer.
+        /// </summary>
+        /// <exception cref="System.NullReferenceException">Map service was not found.</exception>
         protected override void Execute()
         {
             // Get the feature layer to be queried.
@@ -31,7 +43,6 @@ namespace SolarCalculator
             var mapName = mapServer.DefaultMapName;
             var layerInfos = mapServer.GetServerInfo(mapName).MapLayerInfos;
 
-            // Find the index position of the map layer to query.
             var c = layerInfos.Count;
             var layerIndex = 0;
             for (var i = 0; i < c; i++)
@@ -42,9 +53,9 @@ namespace SolarCalculator
                 layerIndex = i;
                 break;
             }
-            // Use IMapServerDataAccess to get the data
+
             var dataAccess = (IMapServerDataAccess) mapServer;
-            // Get access to the source feature class.
+
             var featureClass = dataAccess.GetDataSource(mapName, layerIndex) as IFeatureClass;
 
             if (featureClass == null)

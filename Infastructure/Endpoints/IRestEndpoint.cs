@@ -1,6 +1,6 @@
 using ESRI.ArcGIS.SOESupport;
 
-namespace SolarCalculator.Endpoints
+namespace SolarCalculator.Infastructure.Endpoints
 {
     /// <summary>
     ///   Interface that defines a Rest endpoint

@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using SolarCalculator.DataStructures;
 
 namespace SolarCalculator.Models
 {

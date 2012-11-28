@@ -4,8 +4,19 @@ using ESRI.ArcGIS.esriSystem;
 
 namespace SolarCalculator.Extensions
 {
+    /// <summary>
+    ///   Extensions on property sets
+    /// </summary>
     public static class PropertySetExensions
     {
+        /// <summary>
+        ///   Gets the value as string.
+        /// </summary>
+        /// <param name="property"> The property. </param>
+        /// <param name="key"> The key. </param>
+        /// <param name="errorOnNull"> if set to <c>true</c> [error on null]. </param>
+        /// <returns> </returns>
+        /// <exception cref="System.NullReferenceException"></exception>
         public static string GetValueAsString(this IPropertySet property, string key, bool errorOnNull = false)
         {
             var value = property.GetProperty(key) as string;

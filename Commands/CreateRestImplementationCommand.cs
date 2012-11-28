@@ -2,7 +2,8 @@
 using System.Reflection;
 using ESRI.ArcGIS.SOESupport;
 using SolarCalculator.Endpoints;
-using SolarCalculator.Infastructure;
+using SolarCalculator.Infastructure.Commands;
+using SolarCalculator.Infastructure.Endpoints;
 
 namespace SolarCalculator.Commands
 {

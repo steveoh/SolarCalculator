@@ -1,5 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Reflection;
+using SolarCalculator.Infastructure.Endpoints;
 
 namespace SolarCalculator.Endpoints
 {

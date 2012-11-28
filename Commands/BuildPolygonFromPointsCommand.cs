@@ -4,8 +4,8 @@ using System.Globalization;
 using System.Linq;
 using ESRI.ArcGIS.Geometry;
 using SolarCalculator.Extensions;
-using SolarCalculator.Infastructure;
-using SolarCalculator.Models;
+using SolarCalculator.Infastructure.Commands;
+using SolarCalculator.Models.Geometry;
 
 namespace SolarCalculator.Commands
 {
@@ -25,12 +25,12 @@ namespace SolarCalculator.Commands
         public BuildPolygonFromPointsCommand(AreaOfInterest geometryJson)
         {
             _geometryJson = geometryJson;
-            if (_geometryJson.Polygon.Count < 1)
+            if (_geometryJson.PointCollection.Count < 1)
             {
                 throw new ArgumentException("No coordinate pairs in area of interest polygon");
             }
 
-            if (_geometryJson.Polygon.Count%2 != 0)
+            if (_geometryJson.PointCollection.Count%2 != 0)
             {
                 throw new ArgumentException("Coordinate pairs do not match. Must be even number.");
             }
@@ -42,7 +42,7 @@ namespace SolarCalculator.Commands
         /// <exception cref="System.NullReferenceException">Topological Operator cannot be null. Invalid geometry</exception>
         protected override void Execute()
         {
-            var successes = _geometryJson.Polygon.Batch(2, AddPointToPolygon);
+            var successes = _geometryJson.PointCollection.Batch(2, AddPointToPolygon);
             if (successes.Any(x => x == false))
                 throw new Exception("Error converting coordinates to points.");
 

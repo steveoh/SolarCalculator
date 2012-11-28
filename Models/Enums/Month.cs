@@ -1,6 +1,9 @@
 namespace SolarCalculator.Models.Enums
 {
-    public enum CalendarMonth
+    /// <summary>
+    ///   Months of the year
+    /// </summary>
+    public enum Month
     {
         January,
         February,

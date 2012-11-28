@@ -7,11 +7,11 @@ using ESRI.ArcGIS.SOESupport;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("SolarCalculator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Server Object Extension")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("AGRC")]
 [assembly: AssemblyProduct("SolarCalculator")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCopyright("Copyright ©2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -24,20 +24,8 @@ using ESRI.ArcGIS.SOESupport;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
 [assembly: Guid("21774da8-e926-4eb5-97e6-b77194eb73aa")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-
-[assembly: AssemblyVersion("0.1.124.1127")]
-[assembly: AssemblyFileVersion("0.1.124.1127")]
+[assembly: AssemblyVersion("0.1.141.1128")]
+[assembly: AssemblyFileVersion("0.1.141.1128")]
 [assembly: AddInPackage("SolarCalculator", "f06c4e70-96b0-4d72-a4d5-71ea0d314652",
     Author = "mapserv",
     Company = "AGRC",

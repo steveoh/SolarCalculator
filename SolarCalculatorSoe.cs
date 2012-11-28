@@ -4,7 +4,8 @@ using ESRI.ArcGIS.SOESupport;
 using ESRI.ArcGIS.Server;
 using ESRI.ArcGIS.esriSystem;
 using SolarCalculator.Commands;
-using SolarCalculator.Infastructure;
+using SolarCalculator.Infastructure.Commands;
+using SolarCalculator.Models.Date;
 using SolarCalculator.Models.Esri;
 
 namespace SolarCalculator
@@ -42,6 +43,10 @@ namespace SolarCalculator
 
         #region IObjectConstruct Members
 
+        /// <summary>
+        ///   This is where you put any expensive business logic that you don’t need to run on each request. For example, if you know you’re always working with the same layer in the map, you can put the code to get the layer here.
+        /// </summary>
+        /// <param name="props"> The props. </param>
         public override void Construct(IPropertySet props)
         {
             base.Construct(props);

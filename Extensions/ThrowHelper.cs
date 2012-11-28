@@ -2,6 +2,9 @@ using System;
 
 namespace SolarCalculator.Extensions
 {
+    /// <summary>
+    ///   Borrowed from morelinq to make batch work.
+    /// </summary>
     internal static class ThrowHelper
     {
         internal static void ThrowIfNull<T>(this T argument, string name) where T : class

@@ -1,4 +1,4 @@
-﻿namespace SolarCalculator.Infastructure
+﻿namespace SolarCalculator.Infastructure.Commands
 {
     public class CommandExecutor
     {

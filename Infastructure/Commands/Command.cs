@@ -3,7 +3,7 @@ using System.Diagnostics;
 using ESRI.ArcGIS.SOESupport;
 using SolarCalculator.Extensions;
 
-namespace SolarCalculator.Infastructure
+namespace SolarCalculator.Infastructure.Commands
 {
     /// <summary>
     ///   A command with no return value

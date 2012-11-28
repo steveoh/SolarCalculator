@@ -77,11 +77,7 @@
     <Compile Include="Commands\CreateEnumsFromPropertyStringsCommand.cs" />
     <Compile Include="Commands\CreateRestImplementationCommand.cs" />
     <Compile Include="Commands\FindAllEndpointsCommand.cs" />
-    <Compile Include="DataStructures\CalendarMonths.cs" />
-    <Compile Include="DataStructures\SolarPotential.cs" />
-    <Compile Include="Endpoints\GetSolarPotentialCommand.cs" />
-    <Compile Include="Endpoints\IRestEndpoint.cs" />
-    <Compile Include="Endpoints\JsonEndpoint.cs" />
+    <Compile Include="Commands\GetSolarPotentialCommand.cs" />
     <Compile Include="Endpoints\VersionEndpoint.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
@@ -91,16 +87,20 @@
     <Compile Include="FindIndexByFieldNameCommand.cs" />
     <Compile Include="FindLayerByNameCommand.cs" />
     <Compile Include="IndexFieldMap.cs" />
-    <Compile Include="Infastructure\Command.cs" />
-    <Compile Include="Infastructure\CommandExecutor.cs" />
-    <Compile Include="Models\AreaOfInterest.cs" />
-    <Compile Include="Models\Enums\CalendarMonth.cs" />
+    <Compile Include="Infastructure\Commands\Command.cs" />
+    <Compile Include="Infastructure\Commands\CommandExecutor.cs" />
+    <Compile Include="Infastructure\Endpoints\IRestEndpoint.cs" />
+    <Compile Include="Infastructure\Endpoints\JsonEndpoint.cs" />
+    <Compile Include="Models\Date\AnnualSolarPotential.cs" />
+    <Compile Include="Models\Date\MonthTypeContainer.cs" />
+    <Compile Include="Models\Geometry\AreaOfInterest.cs" />
+    <Compile Include="Models\Enums\Month.cs" />
     <Compile Include="Models\Enums\SolarType.cs" />
     <Compile Include="Models\Esri\ApplicationCache.cs" />
     <Compile Include="Models\Esri\ErrorContainer.cs" />
     <Compile Include="Models\Esri\ErrorModel.cs" />
     <Compile Include="Models\SolarContainer.cs" />
-    <Compile Include="MonthTypeContainer.cs" />
+    <Compile Include="Models\SolarPotential.cs" />
     <Compile Include="SoeBase.cs" />
     <Compile Include="Endpoints\SolarCalculatorRestEndpoint.cs" />
     <Compile Include="SolarCalculatorSoe.cs" />
@@ -146,7 +146,7 @@
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.MonthAndDayStamp" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" />
+      <UserProperties BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_BuildVersioningStyle="None.None.Increment.MonthAndDayStamp" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,11 +5,12 @@ using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.SOESupport;
 using SolarCalculator.Attributes;
 using SolarCalculator.Commands;
-using SolarCalculator.DataStructures;
 using SolarCalculator.Extensions;
-using SolarCalculator.Infastructure;
+using SolarCalculator.Infastructure.Commands;
+using SolarCalculator.Infastructure.Endpoints;
 using SolarCalculator.Models;
 using SolarCalculator.Models.Esri;
+using SolarCalculator.Models.Geometry;
 
 namespace SolarCalculator.Endpoints
 {
@@ -72,7 +73,7 @@ namespace SolarCalculator.Endpoints
 
             var areaOfInterest = new AreaOfInterest
                 {
-                    Polygon = geometryJson.Cast<decimal>().ToList()
+                    PointCollection = geometryJson.Cast<decimal>().ToList()
                 };
 
             IPolygon4 polygon;

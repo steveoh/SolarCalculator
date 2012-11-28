@@ -1,16 +1,19 @@
 using System;
 using SolarCalculator.Models.Enums;
 
-namespace SolarCalculator
+namespace SolarCalculator.Models.Date
 {
+    /// <summary>
+    ///   A data transfer object for solidifying the month type and solar type
+    /// </summary>
     public class MonthTypeContainer
     {
-        public MonthTypeContainer(string month, string type)
+        public MonthTypeContainer(string monthString, string type)
         {
-            CalendarMonth calendarMonth;
+            Month month;
             SolarType solarType;
 
-            if (!Enum.TryParse(month, out calendarMonth))
+            if (!Enum.TryParse(monthString, out month))
             {
                 throw new ArgumentException("Month is not a calendar month");
             }
@@ -20,11 +23,11 @@ namespace SolarCalculator
                 throw new ArgumentException("Solar type is not duration or radiation");
             }
 
-            Month = calendarMonth;
+            Month = month;
             SolarType = solarType;
         }
 
-        public CalendarMonth Month { get; set; }
+        public Month Month { get; set; }
         public SolarType SolarType { get; set; }
     }
 }
