@@ -54,6 +54,8 @@ namespace SolarCalculator.Commands
             IFeature feature;
             while ((feature = cursor.NextFeature()) != null)
             {
+                solarPotential.InputArea++;
+
                 foreach (var item in _propertyValueIndexMap)
                 {
                     AddValueToSolarPotential(item, feature, solarPotential);
