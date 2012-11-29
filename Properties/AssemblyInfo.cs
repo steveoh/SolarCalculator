@@ -46,8 +46,8 @@ using ESRI.ArcGIS.SOESupport;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
 [assembly: Guid("21774da8-e926-4eb5-97e6-b77194eb73aa")]
-[assembly: AssemblyVersion("0.1.158.1128")]
-[assembly: AssemblyFileVersion("0.1.158.1128")]
+[assembly: AssemblyVersion("0.1.160.1128")]
+[assembly: AssemblyFileVersion("0.1.160.1128")]
 [assembly: AddInPackage("SolarCalculator", "f06c4e70-96b0-4d72-a4d5-71ea0d314652",
     Author = "mapserv",
     Company = "AGRC",
