@@ -26,12 +26,12 @@ using System.Linq;
 using System.Reflection;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
+using SolarCalculator.Cache;
 using SolarCalculator.Extensions;
 using SolarCalculator.Infastructure.Commands;
 using SolarCalculator.Models;
 using SolarCalculator.Models.Date;
 using SolarCalculator.Models.Enums;
-using SolarCalculator.Models.Esri;
 
 namespace SolarCalculator.Commands
 {

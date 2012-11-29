@@ -22,9 +22,10 @@
 
 using System.Collections.Generic;
 using ESRI.ArcGIS.Geodatabase;
+using SolarCalculator.Models;
 using SolarCalculator.Models.Date;
 
-namespace SolarCalculator.Models.Esri
+namespace SolarCalculator.Cache
 {
     /// <summary>
     ///   The global cache for the application

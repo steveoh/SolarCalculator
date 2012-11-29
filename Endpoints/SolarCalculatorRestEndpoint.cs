@@ -26,6 +26,7 @@ using System.Linq;
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.SOESupport;
 using SolarCalculator.Attributes;
+using SolarCalculator.Cache;
 using SolarCalculator.Commands;
 using SolarCalculator.Extensions;
 using SolarCalculator.Infastructure.Commands;

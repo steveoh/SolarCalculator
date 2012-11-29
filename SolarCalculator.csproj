@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\EndpointAttribute.cs" />
+    <Compile Include="Cache\ApplicationCache.cs" />
     <Compile Include="Commands\BuildPolygonFromPointsCommand.cs" />
     <Compile Include="Commands\CreateEnumsFromPropertyStringsCommand.cs" />
     <Compile Include="Commands\CreateRestImplementationCommand.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Models\Geometry\AreaOfInterest.cs" />
     <Compile Include="Models\Enums\Month.cs" />
     <Compile Include="Models\Enums\SolarType.cs" />
-    <Compile Include="Models\Esri\ApplicationCache.cs" />
     <Compile Include="Models\Esri\ErrorContainer.cs" />
     <Compile Include="Models\Esri\ErrorModel.cs" />
     <Compile Include="Models\IndexFieldMap.cs" />
@@ -131,9 +131,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Existing\OldService.txt" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

@@ -26,11 +26,11 @@ using System.Runtime.InteropServices;
 using ESRI.ArcGIS.SOESupport;
 using ESRI.ArcGIS.Server;
 using ESRI.ArcGIS.esriSystem;
+using SolarCalculator.Cache;
 using SolarCalculator.Commands;
 using SolarCalculator.Extensions;
 using SolarCalculator.Infastructure.Commands;
 using SolarCalculator.Models.Date;
-using SolarCalculator.Models.Esri;
 
 namespace SolarCalculator
 {
