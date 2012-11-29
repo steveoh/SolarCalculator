@@ -74,6 +74,8 @@
   <ItemGroup>
     <Compile Include="Attributes\EndpointAttribute.cs" />
     <Compile Include="Cache\ApplicationCache.cs" />
+    <Compile Include="Cache\DebugConfiguration.cs" />
+    <Compile Include="Cache\UserConfiguration.cs" />
     <Compile Include="Commands\BuildPolygonFromPointsCommand.cs" />
     <Compile Include="Commands\CreateEnumsFromPropertyStringsCommand.cs" />
     <Compile Include="Commands\CreateRestImplementationCommand.cs" />
@@ -91,6 +93,8 @@
     <Compile Include="Infastructure\Commands\CommandExecutor.cs" />
     <Compile Include="Infastructure\Endpoints\IRestEndpoint.cs" />
     <Compile Include="Infastructure\Endpoints\JsonEndpoint.cs" />
+    <Compile Include="Infastructure\IConfigurable.cs" />
+    <Compile Include="Infastructure\IOC\Container.cs" />
     <Compile Include="Models\Date\AnnualSolarPotential.cs" />
     <Compile Include="Models\Date\MonthTypeContainer.cs" />
     <Compile Include="Models\Geometry\AreaOfInterest.cs" />

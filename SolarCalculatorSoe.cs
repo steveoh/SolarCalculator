@@ -20,17 +20,15 @@
 
 #endregion
 
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using ESRI.ArcGIS.SOESupport;
 using ESRI.ArcGIS.Server;
 using ESRI.ArcGIS.esriSystem;
 using SolarCalculator.Cache;
 using SolarCalculator.Commands;
-using SolarCalculator.Extensions;
+using SolarCalculator.Infastructure;
 using SolarCalculator.Infastructure.Commands;
-using SolarCalculator.Models.Date;
+using SolarCalculator.Infastructure.IOC;
 
 namespace SolarCalculator
 {
@@ -63,7 +61,16 @@ namespace SolarCalculator
         {
             ReqHandler = CommandExecutor.ExecuteCommand(
                 new CreateRestImplementationCommand(typeof (FindAllEndpointsCommand).Assembly));
+
+            Kernel = new Container();
+#if DEBUG
+            Kernel.Register<IConfigurable>(x => new DebugConfiguration());
+#else
+            Kernel.Register<IConfigurable>(x => new UserConfiguration());
+#endif
         }
+
+        private Container Kernel { get; set; }
 
         #region IObjectConstruct Members
 
@@ -75,47 +82,10 @@ namespace SolarCalculator
         {
             base.Construct(props);
 
-            const string properties =
-                "January.Duration=;February.Duration=;March.Duration=;April.Duration=;May.Duration=;June.Duration=;July.Duration=;August.Duration=;September.Duration=;October.Duration=;November.Duration=;December.Duration=;" +
-                "January.Radiation=;February.Radiation=;March.Radiation=;April.Radiation=;May.Radiation=;June.Radiation=;July.Radiation=;August.Radiation=;September.Radiation=;October.Radiation=;November.Radiation=;December.Radiation=;" +
-                "Annual.Duration=";
-#if DEBUG
-            var propertyValueMap = new Dictionary<MonthTypeContainer, string>
-                {
-                    {new MonthTypeContainer("January", "Duration"), "DUR1"},
-                    {new MonthTypeContainer("February", "Duration"), "DUR2"},
-                    {new MonthTypeContainer("March", "Duration"), "DUR3"},
-                    {new MonthTypeContainer("April", "Duration"), "DUR4"},
-                    {new MonthTypeContainer("May", "Duration"), "DUR5"},
-                    {new MonthTypeContainer("June", "Duration"), "DUR6"},
-                    {new MonthTypeContainer("July", "Duration"), "DUR7"},
-                    {new MonthTypeContainer("August", "Duration"), "DUR8"},
-                    {new MonthTypeContainer("September", "Duration"), "DUR9"},
-                    {new MonthTypeContainer("October", "Duration"), "DUR10"},
-                    {new MonthTypeContainer("November", "Duration"), "DUR11"},
-                    {new MonthTypeContainer("December", "Duration"), "DUR12"},
-                    {new MonthTypeContainer("January", "Radiation"), "SOL1"},
-                    {new MonthTypeContainer("February", "Radiation"), "SOL2"},
-                    {new MonthTypeContainer("March", "Radiation"), "SOL3"},
-                    {new MonthTypeContainer("April", "Radiation"), "SOL4"},
-                    {new MonthTypeContainer("May", "Radiation"), "SOL5"},
-                    {new MonthTypeContainer("June", "Radiation"), "SOL6"},
-                    {new MonthTypeContainer("July", "Radiation"), "SOL7"},
-                    {new MonthTypeContainer("August", "Radiation"), "SOL8"},
-                    {new MonthTypeContainer("September", "Radiation"), "SOL9"},
-                    {new MonthTypeContainer("October", "Radiation"), "SOL10"},
-                    {new MonthTypeContainer("November", "Radiation"), "SOL11"},
-                    {new MonthTypeContainer("December", "Radiation"), "SOL12"},
-                    {new MonthTypeContainer("Annual", "Duration"), "DURANN"}
-                };
+            var config = Kernel.Create<IConfigurable>();
 
-            const string layerName = "SolarPoints";
-#else
-            var propertyValueMap = properties.Replace("=", "").Split(';')
-                .ToDictionary(key => CommandExecutor.ExecuteCommand(new CreateEnumsFromPropertyStringsCommand(key)), value => props.GetValueAsString(value));
-
-            var layerName = props.GetValueAsString("LayerName", true);
-#endif
+            var propertyValueMap = config.CreatePropertyValueMap(props);
+            var layerName = config.GetLayerName(props);
 
             ApplicationCache.Layer =
                 CommandExecutor.ExecuteCommand(new FindLayerByNameCommand(layerName,

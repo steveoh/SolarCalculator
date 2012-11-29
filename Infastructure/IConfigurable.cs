@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // 
 // Copyright (C) 2012 AGRC
@@ -20,37 +20,29 @@
 
 #endregion
 
-using System.Collections.Specialized;
-using System.Reflection;
-using System.Text;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using ESRI.ArcGIS.esriSystem;
+using SolarCalculator.Models.Date;
 
-namespace SolarCalculator.Endpoints
+namespace SolarCalculator.Infastructure
 {
     /// <summary>
-    ///   Displays the information about the soe.
+    ///   Interface for getting field names and other configurable stuff
     /// </summary>
-    public static class VersionEndpoint
+    public interface IConfigurable
     {
         /// <summary>
-        ///   Handlers the rest request for when the soe page is viewed.
+        ///   Gets the name of the layer.
         /// </summary>
-        /// <param name="boundVariables"> The bound variables. </param>
-        /// <param name="outputFormat"> The output format. </param>
-        /// <param name="requestProperties"> The request properties. </param>
-        /// <param name="responseProperties"> The response properties. </param>
+        /// <param name="props"> The props. </param>
         /// <returns> </returns>
-        public static byte[] Handler(NameValueCollection boundVariables, string outputFormat, string requestProperties,
-                                     out string responseProperties)
-        {
-            responseProperties = null;
+        string GetLayerName(IPropertySet props);
 
-            return Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new
-                {
-                    Description = "Solar Potential Calculator",
-                    CreatedBy = "AGRC - Steve Gourley @steveAGRC",
-                    Version = Assembly.GetExecutingAssembly().GetName().Version.ToString()
-                }));
-        }
+        /// <summary>
+        ///   Creates the property value map.
+        /// </summary>
+        /// <param name="props"> The props. </param>
+        /// <returns> </returns>
+        Dictionary<MonthTypeContainer, string> CreatePropertyValueMap(IPropertySet props);
     }
 }
