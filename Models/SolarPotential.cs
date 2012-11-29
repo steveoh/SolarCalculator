@@ -20,45 +20,48 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using SolarCalculator.Attributes;
-using SolarCalculator.Extensions;
-using SolarCalculator.Infastructure.Commands;
+using Newtonsoft.Json;
+using SolarCalculator.Models.Date;
 
-namespace SolarCalculator.Commands
+namespace SolarCalculator.Models
 {
     /// <summary>
-    ///   Command that finds all classes that are decorate by the Endpoint attribute
+    ///   Container for solar potential
     /// </summary>
-    public class FindAllEndpointsCommand : Command<IEnumerable<Type>>
+    public class SolarPotential
     {
-        /// <summary>
-        ///   The _assembly to scan
-        /// </summary>
-        private readonly Assembly _assemblyToScan;
-
-        /// <summary>
-        ///   Initializes a new instance of the <see cref="FindAllEndpointsCommand" /> class.
-        /// </summary>
-        /// <param name="assemblyToScan"> The assembly to scan. </param>
-        public FindAllEndpointsCommand(Assembly assemblyToScan)
+        public SolarPotential()
         {
-            _assemblyToScan = assemblyToScan;
+            Duration = new AnnualSolarPotential();
+            Radiation = new AnnualSolarPotential();
         }
 
         /// <summary>
-        ///   code to execute when command is run.
+        ///   Gets or sets the duration.
         /// </summary>
-        protected override void Execute()
-        {
-            Result = _assemblyToScan.FindTypesWithAttribute(typeof (EndpointAttribute));
-        }
+        /// <value> The duration. </value>
+        [JsonProperty("duration")]
+        public AnnualSolarPotential Duration { get; set; }
 
-        public override string ToString()
-        {
-            return string.Format("{0}, AssemblyToScan: {1}", "FindAllEndpointsCommand", _assemblyToScan.GetName());
-        }
+        /// <summary>
+        ///   Gets or sets the radiation.
+        /// </summary>
+        /// <value> The radiation. </value>
+        [JsonProperty("radiation")]
+        public AnnualSolarPotential Radiation { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the input area.
+        /// </summary>
+        /// <value> The square meters of input area. </value>
+        [JsonProperty("inputDurationArea")]
+        public int InputArea { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the area used in calculation.
+        /// </summary>
+        /// <value> The square meters of solar analysis points used in the calculations. Where the duration amount was greater than the threshold.. </value>
+        [JsonProperty("qualifyingDurationArea")]
+        public int AreaUsedInCalculation { get; set; }
     }
 }

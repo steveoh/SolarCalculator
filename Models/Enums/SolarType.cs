@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // 
 // Copyright (C) 2012 AGRC
@@ -20,14 +20,21 @@
 
 #endregion
 
-using System;
-
-namespace SolarCalculator.Attributes
+namespace SolarCalculator.Models.Enums
 {
     /// <summary>
-    ///   Attribute marking a class as an service endpoint
+    ///   The types of solar we are calculating
     /// </summary>
-    public class EndpointAttribute : Attribute
+    public enum SolarType
     {
+        /// <summary>
+        ///   The duration of sunlight a point sees
+        /// </summary>
+        Duration,
+
+        /// <summary>
+        ///   The radiation - the solar intensity
+        /// </summary>
+        Radiation
     }
 }

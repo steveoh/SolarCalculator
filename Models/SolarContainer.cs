@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // 
 // Copyright (C) 2012 AGRC
@@ -20,14 +20,30 @@
 
 #endregion
 
-using System;
+using Newtonsoft.Json;
 
-namespace SolarCalculator.Attributes
+namespace SolarCalculator.Models
 {
     /// <summary>
-    ///   Attribute marking a class as an service endpoint
+    ///   Container class for sending back statistics
     /// </summary>
-    public class EndpointAttribute : Attribute
+    public class SolarContainer
     {
+        public SolarContainer()
+        {
+            SolarPotential = new SolarPotential();
+        }
+
+        public SolarContainer(SolarPotential solarPotential)
+        {
+            SolarPotential = solarPotential;
+        }
+
+        /// <summary>
+        ///   Gets or sets the solar potential.
+        /// </summary>
+        /// <value> The solar potential. </value>
+        [JsonProperty("solarPotential")]
+        public SolarPotential SolarPotential { get; set; }
     }
 }

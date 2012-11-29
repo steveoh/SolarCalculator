@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // 
 // Copyright (C) 2012 AGRC
@@ -22,12 +22,35 @@
 
 using System;
 
-namespace SolarCalculator.Attributes
+namespace SolarCalculator.Extensions
 {
     /// <summary>
-    ///   Attribute marking a class as an service endpoint
+    ///   Borrowed from morelinq to make batch work.
     /// </summary>
-    public class EndpointAttribute : Attribute
+    internal static class ThrowHelper
     {
+        internal static void ThrowIfNull<T>(this T argument, string name) where T : class
+        {
+            if (argument == null)
+            {
+                throw new ArgumentNullException(name);
+            }
+        }
+
+        internal static void ThrowIfNegative(this int argument, string name)
+        {
+            if (argument < 0)
+            {
+                throw new ArgumentOutOfRangeException(name);
+            }
+        }
+
+        internal static void ThrowIfNonPositive(this int argument, string name)
+        {
+            if (argument <= 0)
+            {
+                throw new ArgumentOutOfRangeException(name);
+            }
+        }
     }
 }

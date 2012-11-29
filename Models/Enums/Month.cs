@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // 
 // Copyright (C) 2012 AGRC
@@ -20,14 +20,25 @@
 
 #endregion
 
-using System;
-
-namespace SolarCalculator.Attributes
+namespace SolarCalculator.Models.Enums
 {
     /// <summary>
-    ///   Attribute marking a class as an service endpoint
+    ///   Months of the year
     /// </summary>
-    public class EndpointAttribute : Attribute
+    public enum Month
     {
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December,
+        Annual
     }
 }

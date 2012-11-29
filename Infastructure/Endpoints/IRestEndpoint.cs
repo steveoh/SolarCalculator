@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // 
 // Copyright (C) 2012 AGRC
@@ -20,14 +20,19 @@
 
 #endregion
 
-using System;
+using ESRI.ArcGIS.SOESupport;
 
-namespace SolarCalculator.Attributes
+namespace SolarCalculator.Infastructure.Endpoints
 {
     /// <summary>
-    ///   Attribute marking a class as an service endpoint
+    ///   Interface that defines a Rest endpoint
     /// </summary>
-    public class EndpointAttribute : Attribute
+    public interface IRestEndpoint
     {
+        /// <summary>
+        ///   Returns the rest operation with all the details about the rest operation.
+        /// </summary>
+        /// <returns> </returns>
+        RestOperation RestOperation();
     }
 }

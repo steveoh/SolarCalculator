@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // 
 // Copyright (C) 2012 AGRC
@@ -20,14 +20,29 @@
 
 #endregion
 
-using System;
-
-namespace SolarCalculator.Attributes
+namespace SolarCalculator
 {
     /// <summary>
-    ///   Attribute marking a class as an service endpoint
+    ///   A mapping holding the column index for the field name
     /// </summary>
-    public class EndpointAttribute : Attribute
+    public class IndexFieldMap
     {
+        public IndexFieldMap(int index, string field)
+        {
+            Index = index;
+            Field = field;
+        }
+
+        /// <summary>
+        ///   Gets or sets the index.
+        /// </summary>
+        /// <value> The index. </value>
+        public int Index { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the field name.
+        /// </summary>
+        /// <value> The field. </value>
+        public string Field { get; set; }
     }
 }

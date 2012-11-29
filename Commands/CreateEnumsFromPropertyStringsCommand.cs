@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // 
 // Copyright (C) 2012 AGRC
@@ -21,44 +21,44 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Reflection;
-using SolarCalculator.Attributes;
-using SolarCalculator.Extensions;
 using SolarCalculator.Infastructure.Commands;
+using SolarCalculator.Models.Date;
 
 namespace SolarCalculator.Commands
 {
     /// <summary>
-    ///   Command that finds all classes that are decorate by the Endpoint attribute
+    ///   converts teh ersi property syntax to concrete classes
     /// </summary>
-    public class FindAllEndpointsCommand : Command<IEnumerable<Type>>
+    public class CreateEnumsFromPropertyStringsCommand : Command<MonthTypeContainer>
     {
-        /// <summary>
-        ///   The _assembly to scan
-        /// </summary>
-        private readonly Assembly _assemblyToScan;
+        private readonly string _key;
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref="FindAllEndpointsCommand" /> class.
+        ///   Initializes a new instance of the <see cref="CreateEnumsFromPropertyStringsCommand" /> class.
         /// </summary>
-        /// <param name="assemblyToScan"> The assembly to scan. </param>
-        public FindAllEndpointsCommand(Assembly assemblyToScan)
+        /// <param name="key"> The property key. </param>
+        public CreateEnumsFromPropertyStringsCommand(string key)
         {
-            _assemblyToScan = assemblyToScan;
+            _key = key;
         }
 
         /// <summary>
         ///   code to execute when command is run.
         /// </summary>
+        /// <exception cref="System.ArgumentException">Custom Properties must have 'month type' format</exception>
         protected override void Execute()
         {
-            Result = _assemblyToScan.FindTypesWithAttribute(typeof (EndpointAttribute));
+            var parts = _key.Split('.');
+
+            if (parts.Length != 2)
+                throw new ArgumentException("Custom Properties must have 'month type' format");
+
+            Result = new MonthTypeContainer(parts[0], parts[1]);
         }
 
         public override string ToString()
         {
-            return string.Format("{0}, AssemblyToScan: {1}", "FindAllEndpointsCommand", _assemblyToScan.GetName());
+            return string.Format("{0}, Key: {1}", "CreateEnumsFromPropertyStringsCommand", _key);
         }
     }
 }
