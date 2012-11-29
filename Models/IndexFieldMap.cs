@@ -20,7 +20,7 @@
 
 #endregion
 
-namespace SolarCalculator
+namespace SolarCalculator.Models
 {
     /// <summary>
     ///   A mapping holding the column index for the field name
