@@ -23,6 +23,7 @@
 using System.Collections.Generic;
 using ESRI.ArcGIS.Geodatabase;
 using SolarCalculator.Infastructure.Commands;
+using SolarCalculator.Models;
 using SolarCalculator.Models.Date;
 
 namespace SolarCalculator.Commands
