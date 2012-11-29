@@ -21,11 +21,13 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using ESRI.ArcGIS.SOESupport;
 using ESRI.ArcGIS.Server;
 using ESRI.ArcGIS.esriSystem;
 using SolarCalculator.Commands;
+using SolarCalculator.Extensions;
 using SolarCalculator.Infastructure.Commands;
 using SolarCalculator.Models.Date;
 using SolarCalculator.Models.Esri;
@@ -112,7 +114,7 @@ namespace SolarCalculator
             var propertyValueMap = properties.Replace("=", "").Split(';')
                 .ToDictionary(key => CommandExecutor.ExecuteCommand(new CreateEnumsFromPropertyStringsCommand(key)), value => props.GetValueAsString(value));
 
-            const string layerName = props.GetValueAsString("LayerName", true);
+            var layerName = props.GetValueAsString("LayerName", true);
 #endif
 
             ApplicationCache.Layer =
