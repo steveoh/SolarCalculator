@@ -12,7 +12,7 @@ The default template for server object extensions from esri is _pretty_ bad. I w
 
 ##To Install##
 
-<span class="mega-icon mega-icon-clone">Clone</span> the repository or <span class="mega-icon mega-icon-download">download<span> the zip and 
+**Clone** the repository or **download** the zip and then
 
 1. **Login** to arcgis server manager.
 2. **Click** on `Site` then the `Extensions` tab.
