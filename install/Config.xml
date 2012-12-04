@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ESRI.Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.esri.com/Desktop/AddIns">
+  <Name>SolarCalculator</Name>
+  <AddInID>f06c4e70-96b0-4d72-a4d5-71ea0d314652</AddInID>
+  <Description>Solar Calculater</Description>
+  <Version>1.0</Version>
+  <Author>mapserv</Author>
+  <Company>AGRC</Company>
+  <Date>2012-11-20T13:51:49</Date>
+  <Targets>
+    <Target name="Server" version="10.1" />
+  </Targets>
+  <AddIn language="CLR">
+    <ServerObjectType>
+      <Name>MapServer</Name>
+      <ExtensionTypes>
+        <ExtensionType id="SolarCalculator.SolarCalculatorSoe" library="SolarCalculator.dll" class="SolarCalculator.SolarCalculatorSoe">
+          <Name>SolarCalculatorSoe</Name>
+          <DisplayName>Solar Potential</DisplayName>
+          <Description>Query and aggregate solar potential for a given area.</Description>
+          <Properties>
+            <January.Duration />
+            <February.Duration />
+            <March.Duration />
+            <April.Duration />
+            <May.Duration />
+            <June.Duration />
+            <July.Duration />
+            <August.Duration />
+            <September.Duration />
+            <October.Duration />
+            <November.Duration />
+            <December.Duration />
+            <January.Radiation />
+            <February.Radiation />
+            <March.Radiation />
+            <April.Radiation />
+            <May.Radiation />
+            <June.Radiation />
+            <July.Radiation />
+            <August.Radiation />
+            <September.Radiation />
+            <October.Radiation />
+            <November.Radiation />
+            <December.Radiation />
+            <LayerName />
+            <Annual.Duration />
+          </Properties>
+          <Info>
+            <DefaultWebCapabilities />
+            <AllWebCapabilities />
+            <SupportsREST>true</SupportsREST>
+            <SupportsSOAP>false</SupportsSOAP>
+            <hasManagerPropertiesConfigurationPane>false</hasManagerPropertiesConfigurationPane>
+          </Info>
+          <Resources />
+        </ExtensionType>
+      </ExtensionTypes>
+    </ServerObjectType>
+  </AddIn>
+</ESRI.Configuration>
