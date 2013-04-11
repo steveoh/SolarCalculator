@@ -1,4 +1,4 @@
-# A **better** SOE Template™ #
+# A **better** SOE Template™ # :neckbeard:
 
 The default template for server object extensions from esri is _pretty_ bad. I wasn't very happy with it so I modified it. 
 
